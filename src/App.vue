@@ -28,6 +28,14 @@ const addTodo = () => {
 };
 
 
+const checkComplete = (index) => {
+  todos[index].completed = !todos[index].completed;
+};
+
+const removeTodo = (index) => {
+  todos.splice(index, 1);
+};
+
 
 const countAllTodo = computed(() => {
   return todos.length;
@@ -55,7 +63,7 @@ const countCompletedTodo = computed(() => {
     </form>
     <ul v-if="todos.length">
       <li v-for="(todo, index) in todos" :key="todo.id">
-        <SingleTodo :index="index" :todo="todo" />
+        <SingleTodo :index="index" :todo="todo" @checkComplete="checkComplete" @delete="removeTodo" />
       </li>
     </ul>
     <div v-else>
